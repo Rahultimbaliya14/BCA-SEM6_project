@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+{% load static%} 
+{% block title %}Home{% endblock title %}
+{% block body %}
+
+{% if request.session.id %}
+     {{request.session.id}}
+     
+{% endif %}
+<div class="container">
+  
+</div>
+{% endblock body %}

@@ -1,0 +1,53 @@
+{% extends 'base.html'%}
+{% load static%}
+{% block title %}Signup{% endblock title %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'css/signup.css'%}">
+<br>
+<br>
+<br>
+<br>
+
+{% if messages %}
+  {% for message in messages %}
+  <h4 >{{ message }}</h4>
+  {% endfor %}
+{% endif %}
+
+<div class="wrapper">
+  <div class="inner">
+    <img src="{% static 'image/image-1.png'%}" alt="" class="image-1">
+    <form action="{% url 'signup'%}" method="post">
+      {% csrf_token %}
+      <h3>New Account?</h3>
+      <div class="form-holder">
+        <span class="lnr lnr-user"></span>
+        <input type="text" class="form-control" name="name" placeholder="Full Name" required>
+      </div>
+      <div class="form-holder">
+        <span class="lnr lnr-phone-handset"></span>
+        <input type="text" class="form-control" name="phone" placeholder="Phone Number" required>
+      </div>
+      <div class="form-holder">
+        <span class="lnr lnr-envelope"></span>
+        <input type="text" class="form-control" name="mail" placeholder="Mail" required>
+      </div>
+      <div class="form-holder">
+        <span class="lnr lnr-lock"></span>
+        <input type="password" class="form-control" name="pass" placeholder="Password" required>
+      </div>
+      <div class="form-holder">
+        <span class="lnr lnr-lock"></span>
+        <input type="password" name="cpass" class="form-control" placeholder="Confirm Password" required>
+      </div>
+      <button>
+        <span>Register</span>
+      </button>
+    </form>
+    <img src="{% static 'image/image-2.png'%}" alt="" class="image-2">
+  </div>
+
+</div>
+<script src="js/jquery-3.3.1.min.js"> </script>
+<script src="js/main.js"></script>
+{% endblock body %}
