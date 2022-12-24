@@ -1,0 +1,17 @@
+.main{
+    padding: 15px;
+
+}
+.card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+input{
+    width: 100%;
+    text-align: center;
+    height: 40px;
+    font-weight: bolder;
+    border-radius: 5px;
+    border: 2px solid rgba(225,225, 225, 6);
+}

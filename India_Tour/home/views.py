@@ -8,3 +8,5 @@ def about(request):
        return render(request,'about.html')
 def Services(request):
        return render(request,'services.html')
+def hello(request):
+       return render(request,'hello.html')

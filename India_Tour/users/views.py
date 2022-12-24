@@ -26,6 +26,7 @@ def signup(request):
             if passw==cpass:
                 if len(passw)>=8:
                     if ex=="jpg" or ex=="png" or ex=="jpeg":
+                        if len(phone)==10:
                              new=Customer(
                                  name=name,
                                  mobile=phone,
@@ -34,6 +35,9 @@ def signup(request):
                                  image=image
                                  )
                              new.save()
+                        else:
+                            messages.error(request, 'Mobile Number Should Only Contain 10 Number')
+       
                     else:
                         messages.error(request, 'Only Upload PNG,JPEG,JPG')
                 else:
@@ -75,12 +79,28 @@ def logout(request):
     return redirect('/') 
 
 def profile(request):
+    if request.method=='POST':
+        updateid=request.session['id']
+        name=request.POST.get('name')
+        mobile=request.POST.get('mobile')
+        print(mobile)
+        member = Customer.objects.get(id=updateid)
+        member.name=name
+        member.mobile=mobile
+        member.save()
+        # print(member)
+        # print(name,mobile)
     id=request.session['id']
     if not id=="":
          id=request.session['id']
          data=Customer.objects.filter(id=id).values()
-         print(data)
-         return HttpResponse("This Is your Profile")
+         context = {
+         'image': data[0].get('image'),
+         'name':data[0].get('name'),
+         'email':data[0].get('email'),
+         'mobile':data[0].get('mobile')
+         }
+         return render(request,'profile.html',context)
     else:
         messages.error(request, 'profile')
         return redirect('/')

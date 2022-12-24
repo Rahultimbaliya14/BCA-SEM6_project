@@ -1,11 +1,14 @@
+body{
+}
 .manu{
+    background-color: lightcyan;
     border-bottom:0px solid rgba(0, 0, 0, 0.9);
     position: relative;
     left: 200;
 
 }
 .manu img{
-    height: 130px;
+    height: 143px;
     margin-bottom: 40px;
     margin-left: 30px;
     margin-top: 0px;
@@ -22,8 +25,9 @@
     text-align: center;
     justify-content: space-evenly;
     align-items: center;
-    margin-top: -80px;
+    margin-top: -100px;
     padding-top: 10px;
+    padding-bottom: 10px;
     margin-bottom: 13px;
     right: 0;
     list-style-type: none;
