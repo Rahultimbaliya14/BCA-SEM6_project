@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+{%load static%}
+{% block title %}Packages{% endblock title %}
+{% block body %}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<h1 class="text-center my-5 " style=" padding-top: 85px; text-shadow: #FC0 1px 0 10px; font-family: 'Dancing Script', cursive;"><u>Available Packages</u> </h1>
+<hr>
+<link rel="stylesheet" href="{% static 'css/package.css'%}">
+{% for item1 in item %}
+<div class="card mb-2 card2">
+  <img src="http://127.0.0.1:8000/media/{{item1.image}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{item1.Title}}</h5>
+    <p class="card-text">{{item1.Discription}}</p>
+    <!-- <p class="card-text"><large class="text-muted">Last updated 3 mins ago</Large></p> -->
+      <strong>Starting Date:</strong> <small class="text-muted">{{item1.DateOfStart}}</smal7> 
+  </div>
+</div>  
+{% endfor %}
+{% endblock body %}

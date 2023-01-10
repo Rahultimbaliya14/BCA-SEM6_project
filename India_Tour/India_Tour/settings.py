@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'users',
+    'package'
 ]
 
 MIDDLEWARE = [
@@ -86,7 +87,7 @@ DATABASES = {
         'HOST':'localhost',
         'PORT':'3306',
     }
-    # 'default': {
+    # 'custome': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
@@ -141,5 +142,10 @@ STATICFILE_DIRS=BASE_DIR,'static'
 MEDIA_URL = '/media/'
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 
-
-
+#Confugration For Send Mail
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT=587
+EMAIL_HOST_USER='tour.india1414@gmail.com'
+EMAIL_HOST_PASSWORD='jqlmibkllwezygom'
+EMAIL_USE_TLS=True
+# cujygscajxajblvs

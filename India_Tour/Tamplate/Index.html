@@ -1,32 +1,63 @@
 {% extends 'base.html'%}
-{% load static%} 
+{% load static%}
 {% block title %}Home{% endblock title %}
 {% block body %}
 {% if messages%}
-  {% for message in messages %}
-  <script>
-    alert("WithOut Login You Can Not Goes To Profile Page")
-  </script>
-  {% endfor %}
-{% endif %}
-{% if request.session.logedin %}
+{% for message in messages %}
 <script>
-alert("You Already Loged-in")
+  alert("{{message}}")
+</script>
+{% endfor %}
+{% endif %}
+{% if request.session.emailotp %}
+<script>
+  alert("Restricted")
 </script>
 {% endif %}
-<div class="container-fluid my-0">
-     <div id="carouselExampleFade " class="carousel slide carousel-fade" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="https://source.unsplash.com/1600x600/?tajmahal" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="https://source.unsplash.com/1600x600/?gujarat" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="https://source.unsplash.com/1600x600/?india" class="d-block w-100" alt="...">
-            </div>
-          </div>
-        </div>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Moon+Dance&display=swap" rel="stylesheet">
+
+{% include 'header.html '%}
+<div class="container-fluid px-0 my-0">
+  <div id="carouselExampleFade " class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <p class="ptext"><h1 class="ptext">hello</h1></p>
+        <p class="ptext">hwll </p>  
+        <img src="https://source.unsplash.com/random/1920x1080/?wallpaper,landscape'" class="d-block w-100" alt="...">
+      </div>
+      
+      <div class="carousel-item">
+        <p class="ptext"><h1 class="ptext">hello</h1></p>
+        <p class="ptext">hwll </p>  
+        <img src="https://source.unsplash.com/random/1920x1080/?sun'" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <p class="ptext"><h1 class="ptext">hello</h1></p>
+        <p class="ptext">hwll </p>    
+        <img src="https://source.unsplash.com/random/1920x1080/?india'" class="d-block w-100" alt="...">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="Card-c px-1 my-4">
+  {% for item1 in item %}
+  <div class="card" style="width: 18rem;">
+    <img src="http://127.0.0.1:8000/media/{{item1.image}}" class="card-img-top" alt="..." width="200px" height="200px">
+    <div class="card-body" style="background-color: lightyellow;">
+      <img src="http://127.0.0.1:8000/media/user/newgif.gif" alt="" width="40" height="40">
+      <h5 class="card-title">{{item1.Title}}</h5>
+      <p class="card-text">{{item1.Discription}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Starting Date: <b>{{item1.DateOfStart}}</b></li>
+      <li class="list-group-item">Ending Date: <b>{{item1.DateOfEnd}}</b></li>
+    </ul>
+    <div class="card-body">
+      <a href=""><button type="button" class="btn btn-success">Book</button></a>
+    </div>
+  </div>
+  {% endfor %}
 </div>
 {% endblock body %}

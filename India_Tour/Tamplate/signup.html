@@ -10,8 +10,10 @@
 
 {% if messages %}
   {% for message in messages %}
-  <h4 >{{ message }}</h4>
-  {% endfor %}
+  <script>
+    alert("{{message}}");
+  </script>
+  '{% endfor %}'
 {% endif %}
 
 <div class="wrapper">
@@ -39,10 +41,6 @@
       <div class="form-holder">
         <span class="lnr lnr-lock"></span>
         <input type="password" name="cpass" class="form-control" placeholder="Confirm Password" required>
-      </div>
-      <div class="form-holder">
-        <span class="lnr lnr-lock"></span>
-        <input type="file" name="image" class="form-control" placeholder="Upload Image" required>
       </div>
       <button>
         <span>Register</span>

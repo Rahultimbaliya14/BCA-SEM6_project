@@ -1,0 +1,16 @@
+{% load static%}
+<div class="manu" style="display: none;">  
+    <a href="/"><img src="{% static 'image/logo4.png'%}" alt="This Is Logo"></a>
+    <ul>
+      <li><a href="/">HOME</a></li>
+      <li><a href="/about">ABOUT</a></li>
+      <li><a href="/services">SERVICES</a></li>
+      {% if request.session.id %}
+      <li><a href="/acount/logout">LOG-OUT</a></li>
+      <li><a href="/acount/profile">PROFILE</a></li>
+      {% else %}
+      <li><a href="/acount/signup">SIGN-UP</a></li>
+      <li><a href="/acount/login">LOGIN</a></li>
+      {% endif %}
+    </ul>
+  </div>
