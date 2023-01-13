@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 from .models import Package
 
 
@@ -10,3 +10,10 @@ def service(request):
             "item":fatch
            }
     return render(request,'Packages.html',contex)
+
+def book(request):
+    if request.method=='POST':
+        return HttpResponse("hello")
+    else:
+        return redirect('/')
+

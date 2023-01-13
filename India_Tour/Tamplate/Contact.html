@@ -1,0 +1,107 @@
+{% extends 'base.html'%}
+{%load static%}
+{% block title %}Contact{% endblock title %}
+{% block body %}
+    <script src="https://kit.fontawesome.com/0f900b0930.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ms+Madi&family=Qwitcher+Grypen&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/contact.css'%}">
+
+    <div class="toast float-end" role="alert" aria-live="assertive" aria-atomic="true" style="margin-left: 740px; margin-top: 30px; position: absolute; left: 30px; background-color: lightgreen;">
+        <div class="toast-header">
+          <img src="{% static 'image/logo4.png'%}" class="rounded me-2" alt="..." height="20px" width="20px">
+          <strong class="me-auto">Inadi_Tour</strong>
+          <small class="text-muted"></small>
+        </div>
+        <div class="toast-body">
+          Your Request Submited Successfully
+        </div>
+      </div>
+
+    <div class="contact">
+        <div class="content">
+            <h2>Contact-Us</h2>
+        </div>
+        <div class="container">
+            <div class="contactinfo">
+                <div class="box">
+                    <div class="icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div class="text">
+                        <h3>
+                            Address
+                        </h3>
+                        <p>Junagadh, Gujarat 362001</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="icon">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div class="text">
+                        <h3>
+                            Phone
+                        </h3>
+                        <p>+91 635-3647-592</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="text">
+                        <h3>
+                            Email
+                        </h3>
+                        <p>tour.india1414@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contactform">
+                <form action="/contact" method="post">
+                    {% csrf_token %}
+                    <h2>Send Massage</h2>
+                    <div class="inputbox">
+                        {% if request.session.id %}
+                        <input type="text" name="name" id="" value="{{request.session.uname}}" readonly>
+                        {% else %}
+                        <input type="text" name="name" id="" value="" required>
+                        {% endif %}
+                        <h3>Full Name</h3>
+                    </div>
+                    <div class="inputbox">
+                        {% if request.session.id %}
+                        <input type="Email" name="email" id="" value="{{request.session.uemail}}" readonly>
+                        {% else %}
+                        <input type="Email" name="email" id="" value="" required>
+                        {% endif %}
+                        <h3>Email</h3>
+                    </div>
+                    <div class="inputbox">
+                        <textarea name="massage" id="" cols="15" rows="4" required placeholder="Enter Some Text ........"></textarea>
+                        <h3>Type Your Massage</h3>
+                    </div>
+                    <div class="inputbox">
+                        <input type="submit" value="Send">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"> </script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"> </script> 
+    {% if messages %}
+    {% for message in messages %}
+      <script>
+      $(document).ready(function() {  
+        $('.toast').toast('show');  
+      });  
+    </script>
+    {% endfor %}
+    {% endif %}
+{% endblock body %}

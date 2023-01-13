@@ -7,13 +7,18 @@
 <hr>
 <link rel="stylesheet" href="{% static 'css/package.css'%}">
 {% for item1 in item %}
-<div class="card mb-2 card2">
+<div class="card mb-2 card2 text-center">
   <img src="http://127.0.0.1:8000/media/{{item1.image}}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{item1.Title}}</h5>
+  <div class="card-body" >
+    <h5 class="card-title" style="font-size: 30px;">{{item1.Title}}</h5>
     <p class="card-text">{{item1.Discription}}</p>
-    <!-- <p class="card-text"><large class="text-muted">Last updated 3 mins ago</Large></p> -->
-      <strong>Starting Date:</strong> <small class="text-muted">{{item1.DateOfStart}}</smal7> 
+      <strong>Starting Date:</strong> <small class="text-muted">{{item1.DateOfStart}}</small> 
+      <br><br>
+      <strong>Ending Date:</strong> <small class="text-muted">{{item1.DateOfEnd}}</small> 
+      <br>
+      <br>
+      <a href=""><button type="button" class="btn btn-success">Book</button></a>
+
   </div>
 </div>  
 {% endfor %}

@@ -10,8 +10,12 @@ passw=""
 image=""
 phone=""
 otp2=""
+otpr2=""
+emailr=""
+rpwd=""
 
 def signup(request):
+    request.session['id']=""
     request.session['emailotp']=0
     if request.method == 'POST':
         # Get The Request Data
@@ -45,7 +49,7 @@ def signup(request):
                             
                             subject, from_email, to = 'hello', 'tour.india1414@gmail.com',mail
                             text_content = 'This is an important message.'
-                            html_content = '<img src="https://png.pngtrepng-vector/20201214/ourmid/  pngtree-indian-republic-day-design-with-flag-an  vector-png-png-image_  2556755.jpg" alt="Th  Logo"> <br> Hi User <br style="color:red;">     Is Your One Time Password(OTP)<strong>'+otp2+ '<strong><br>Use For     Craete The Acou  India_Tour'
+                            html_content = '<img src="https://png.pngtrepng-vector/20201214/ourmid/  pngtree-indian-republic-day-design-with-flag-an  vector-png-png-image_  2556755.jpg" alt="Th  Logo"> <br> Hi User <br style="color:red;">     Is Your One Time Password(OTP)<strong>'+otp2+ '<strong><br>Use For Craete The Account India_Tour'
 
                             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                             msg.attach_alternative(html_content, "text/html")
@@ -78,8 +82,9 @@ def login(request):
         print(data)
         if data:
             if data[0].get('password') == passwd:
-                print("hello")
                 request.session['id'] = data[0].get('id')
+                request.session['uname']=data[0].get('name')
+                request.session['uemail']=data[0].get('email')
                 return redirect('/')
             else:
                 messages.error(request, 'Password Are Incorrect')
@@ -174,4 +179,38 @@ def email(request):
     else:
         request.session['emailotp'] = 1
         return redirect('/')
+
+def reemail(request):
+    context={
+         'email': emailr
+      }
+    return render(request,'email.html',context)
     
+def forget(request):
+    global rpwd
+    global emailr
+    if request.method=="POST":
+        email=request.POST.get('email')
+        pwd=request.POST.get('password')
+        print(pwd,email)
+        uemail=Customer.objects.filter(email=email).values()
+        if not uemail:
+            messages.error(request,"User Does Not Exist Please Enter Valid Email Address")
+        else:
+            emailr=email
+            rpwd=pwd
+            otpr=random.randint(10000, 99999)
+            otpr2 = str(otpr)
+            print(rpwd,emailr,otpr2)
+            subject, from_email, to = 'hello', 'tour.india1414@gmail.com',emailr
+            text_content = 'This is an important message.'
+            html_content = '<img src="https://png.pngtrepng-vector/20201214/ourmid/  pngtree-indian-republic-day-design-with-flag-an  vector-png-png-image_  2556755.jpg" alt="Th  Logo"> <br> Hi User <br style="color:red;">     Is Your One Time Password(OTP)<strong>'+otpr2+ '<strong><br>Used To Reset The Password '
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            h=msg.send()
+            if h:
+                print("hello")
+            else:
+                messages.error(request,"Some Technical Issue On The Server To Send The Massage")
+            
+    return render(request,'Forgate.html')

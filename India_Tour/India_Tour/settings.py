@@ -9,8 +9,15 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+
 import os
+
+
 from pathlib import Path
+# from pymongo import MongoClient
+# client = MongoClient()
+
+# client = MongoClient('mongodb+srv://rahul:72485@cluster0.gtjd8qf.mongodb.net/?retryWrites=true&w=majority')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,12 +80,25 @@ TEMPLATES = [
 WSGI_APPLICATION = 'India_Tour.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
-#For The Connect To The DataBase Mysql
-DATABASES = {
+
+
+DATABASES ={
+
+     
+    #  'default': {
+    #         'ENGINE': 'djongo',
+    #         'NAME': 'India_tour',
+    #         'ENFORCE_SCHEMA': False,
+    #         'CLIENT': {
+    #             'host': 'mongodb+srv://rahul:72485@<atlas cluster>/<myFirstDatabase>?retryWrites=true&w=majority',
+    #             'username':'rahul',
+    #             'password':'72485',
+    #         }  
+    #     }
+
+
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'india_tour',
@@ -87,6 +107,9 @@ DATABASES = {
         'HOST':'localhost',
         'PORT':'3306',
     }
+
+
+
     # 'custome': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
