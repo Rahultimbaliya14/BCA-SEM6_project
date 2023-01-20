@@ -13,6 +13,7 @@ otp2=""
 otpr2=""
 emailr=""
 rpwd=""
+otpd2=""
 
 def signup(request):
     request.session['id']=""
@@ -47,9 +48,9 @@ def signup(request):
                 if len(passw) >= 8:
                         if len(phone) == 10:
                             
-                            subject, from_email, to = 'hello', 'tour.india1414@gmail.com',mail
+                            subject, from_email, to = 'Create Account', 'tour.india1414@gmail.com',mail
                             text_content = 'This is an important message.'
-                            html_content = '<img src="https://png.pngtrepng-vector/20201214/ourmid/  pngtree-indian-republic-day-design-with-flag-an  vector-png-png-image_  2556755.jpg" alt="Th  Logo"> <br> Hi User <br style="color:red;">     Is Your One Time Password(OTP)<strong>'+otp2+ '<strong><br>Use For Craete The Account India_Tour'
+                            html_content = '<img src="https://cdn.pixabay.com/photo/2015/02/27/22/28/india-652857_960_720.png" alt="img"> <br> Hi '+name+' <br> Is Your One Time Password(OTP)<strong style="color:red;">'+otp2+ '</strong><br>Use For Craete The Account India_Tour'
 
                             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                             msg.attach_alternative(html_content, "text/html")
@@ -175,20 +176,33 @@ def email(request):
       context={
          'email': mail
       }
-      return render(request,'email.html',context)  
+      return render(request,'emailr.html',context)  
     else:
         request.session['emailotp'] = 1
         return redirect('/')
 
 def reemail(request):
+    if request.method=="POST":
+        rotp=request.POST.get('enter')
+        
+        if rotp==otpr2:
+            fetch=Customer.objects.get(email=emailr)
+            print(rpwd)
+            fetch.password=rpwd
+            fetch.save()
+            messages.error(request,"Your Password Reset Successfully")
+            return redirect('login')
+        else:
+            messages.error(request,"Incorrect OTP Plz Try Again")
     context={
          'email': emailr
       }
-    return render(request,'email.html',context)
+    return render(request,'emailr.html',context)
     
 def forget(request):
     global rpwd
     global emailr
+    global otpr2
     if request.method=="POST":
         email=request.POST.get('email')
         pwd=request.POST.get('password')
@@ -197,20 +211,71 @@ def forget(request):
         if not uemail:
             messages.error(request,"User Does Not Exist Please Enter Valid Email Address")
         else:
-            emailr=email
-            rpwd=pwd
-            otpr=random.randint(10000, 99999)
-            otpr2 = str(otpr)
+            if not len(pwd) < 8:
+                emailr=email
+                rpwd=pwd
+                otpr=random.randint(10000, 99999)
+                otpr2 = str(otpr)
+                print(rpwd,emailr,otpr2)
+                subject, from_email, to = 'Forget Password', 'tour.india1414@gmail.com',emailr
+                text_content = 'This is an important message.'
+                html_content = '<img src="https://cdn.pixabay.com/photo/2015/02/27/22/28/india-652857_960_720.png" alt="Img"> <br> Hi '+uemail[0].get('name')+' <br>   Is Your One Time Password(OTP) <strong style="color:red;">'+otpr2+ ' </strong>  Used To Reset The Password '
+                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                msg.attach_alternative(html_content, "text/html")
+                h=msg.send()
+                if h:
+                    return redirect('emailr')
+                else:
+                    messages.error(request,"Some Technical Issue On The Server To Send The Massage")
+            else:
+                print("hello")
+                messages.error(request,"Password Should Be 8 Character Long !!!!")
+
+            
+    return render(request,'Forgate.html')
+
+def demail(request):
+        global otpd2
+        id = request.session['id']
+        if not id == "":
+            name= request.session['uname']
+            semail=request.session['uemail']
+            otpd=random.randint(10000, 99999)
+            otpd2 = str(otpd)
             print(rpwd,emailr,otpr2)
-            subject, from_email, to = 'hello', 'tour.india1414@gmail.com',emailr
+            subject, from_email, to = 'Unregister Account', 'tour.india1414@gmail.com',semail
             text_content = 'This is an important message.'
-            html_content = '<img src="https://png.pngtrepng-vector/20201214/ourmid/  pngtree-indian-republic-day-design-with-flag-an  vector-png-png-image_  2556755.jpg" alt="Th  Logo"> <br> Hi User <br style="color:red;">     Is Your One Time Password(OTP)<strong>'+otpr2+ '<strong><br>Used To Reset The Password '
+            html_content = '<img src="https://cdn.pixabay.com/photo/2015/02/27/22/28/india-652857_960_720.png" alt="Img"> <br> Hi '+name+' <br>   Is Your One Time Password(OTP) <strong style="color:red;">'+otpd2+ ' </strong>  Used To Unregistered The The Account '
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
             h=msg.send()
             if h:
-                print("hello")
+                return redirect('checkdr')
             else:
                 messages.error(request,"Some Technical Issue On The Server To Send The Massage")
-            
-    return render(request,'Forgate.html')
+        else:
+            messages.error(request, 'Ristricted')
+            return redirect('/')
+
+def  checkdr(request):
+    if request.method=="POST":
+        dotp=request.POST.get('enter')
+        if otpd2==dotp:
+            new=Customer.objects.get(id=request.session['id'])
+            new.delete()
+            messages.error(request,"Account Unregistered Successfully")
+            return redirect('logout')
+        else:
+            messages.error(request,"OTP Is Incorrect")
+    
+    
+    
+    id = request.session['id']
+    if not id == "":
+        context={
+         'email': request.session['uemail']
+        }
+        return render(request,'emailr.html',context)
+    else:
+        messages.error(request, 'Ristricted')
+        return redirect('/')
