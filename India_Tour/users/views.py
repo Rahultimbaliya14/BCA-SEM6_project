@@ -47,7 +47,6 @@ def signup(request):
             if passw == cpass:
                 if len(passw) >= 8:
                         if len(phone) == 10:
-                            
                             subject, from_email, to = 'Create Account', 'tour.india1414@gmail.com',mail
                             text_content = 'This is an important message.'
                             html_content = '<img src="https://cdn.pixabay.com/photo/2015/02/27/22/28/india-652857_960_720.png" alt="img"> <br> Hi '+name+' <br> Is Your One Time Password(OTP)<strong style="color:red;">'+otp2+ '</strong><br>Use For Craete The Account India_Tour'
