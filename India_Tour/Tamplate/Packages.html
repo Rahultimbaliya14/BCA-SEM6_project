@@ -2,22 +2,38 @@
 {%load static%}
 {% block title %}Packages{% endblock title %}
 {% block body %}
+{% if messages %}
+    {% for message in messages %}
+    <script>alert("{{message}}")</script>
+    {% endfor %}
+    {% endif %}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 <h1 class="text-center my-5 " style=" padding-top: 85px; text-shadow: #FC0 1px 0 10px; font-family: 'Dancing Script', cursive;"><u>Available Packages</u> </h1>
 <hr>
 <link rel="stylesheet" href="{% static 'css/package.css'%}">
 {% for item1 in item %}
-<div class="card mb-2 card2 text-center">
+<div class="card mb-2 card2 text-left ">
   <img src="http://127.0.0.1:8000/media/{{item1.image}}" class="card-img-top" alt="...">
   <div class="card-body" >
-    <h5 class="card-title" style="font-size: 30px;">{{item1.Title}}</h5>
-    <p class="card-text">{{item1.Discription}}</p>
-      <strong>Starting Date:</strong> <small class="text-muted">{{item1.DateOfStart}}</small> 
+    <h5 class="card-title" style="font-size: 30px; margin-left: 30px;">{{item1.Title}}</h5>
+    <p class="card-text" id="text" style="margin-left: 30px;">{{item1.Discription}}</p>
+      <strong style="margin-left: 30px;" >Starting Date:</strong> <small class="text-muted">{{item1.DateOfStart}}</small> 
+      <strong style="margin-left: 30px;" >Price:</strong> <small class="text-muted">&#x20B9;      {{item1.Prise}}</small> <br><br>
+
+      <strong style="margin-left: 30px;" >Included Places:</strong> <small class="text-muted">{{item1.Listofplace}}</small> 
+
       <br><br>
-      <strong>Ending Date:</strong> <small class="text-muted">{{item1.DateOfEnd}}</small> 
-      <br>
-      <br>
-      <a href=""><button type="button" class="btn btn-success">Book</button></a>
+      <div class="bu" style="display: flex;">
+      <form action="/services/package"  method="post" style="margin-bottom: 10px;">
+        {% csrf_token %}
+        <input type="hidden" value="{{item1.id}}" name="id">
+      <button type="submit" style="margin-left: 30px;" class="btn btn-success">More Info</button>
+    </form> 
+    <form action="/services/book"  method="post" style="margin-bottom: 10px;">
+      {% csrf_token %}
+      <button type="submit" style="margin-left: 30px;" class="btn btn-success">Book</button>
+    </form> 
+  </div>
 
   </div>
 </div>  

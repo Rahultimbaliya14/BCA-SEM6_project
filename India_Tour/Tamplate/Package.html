@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+{% load static%}
+{% block title %}Package{% endblock title %}
+{% block body %}
+
+<br><br><br>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+
+
+
+ 
+<div class="container" style="display: flex; margin-top: 100px;  margin-left: 40px;">
+    <div class="image" style="display: flex; flex-direction: column; align-items: center; ">
+        <img src="http://127.0.0.1:8000/media/{{item.image}}" alt="" style="height: 250px;    border-radius: 20px;">
+        <div class="bu" style="margin-top: 30px;">
+        <input type="text" value="Book" style="width: 90px; color: white; background-color: orangered; border: none;" >
+    </div>
+    </div>
+    <div class="info" style="margin-left: 40px;">
+        <h1 style="color: lightcoral;">Title: <span  style="font-size: 25px; color: black;">{{item.Title}}</span></h1>
+        <h1>Description:</h1><p style="font-family: 'Satisfy', cursive; font-size: 18px; font-weight: bolder;">{{item.Discription}}</p>
+    
+        <h2>Date Of Start:<span  style="font-size: 25px; color: black;">  {{item.DateOfStart}}</span></h1>
+        <h2>Included Place: <span  style="font-size: 25px; color: black;">{{item.Listofplace}}</span></h1>
+
+        <h2 style="color: lightcoral;">Price: <span  style="font-size: 25px; color: black;"> &#x20B9;{{item.Prise}}</span></h1>
+
+    </div>
+</div>
+
+{% endblock body %}

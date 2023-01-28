@@ -49,14 +49,21 @@
     <div class="card-body" style="background-color: lightyellow;">
       <img src="http://127.0.0.1:8000/media/user/newgif.gif" alt="" width="40" height="40">
       <h5 class="card-title">{{item1.Title}}</h5>
-      <p class="card-text">{{item1.Discription}}</p>
+      <p class="card-text" style="white-space: nowrap;
+      overflow: hidden;">{{item1.Discription}}</p>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Starting Date: <b>{{item1.DateOfStart}}</b></li>
-      <li class="list-group-item">Ending Date: <b>{{item1.DateOfEnd}}</b></li>
     </ul>
-    <div class="card-body">
-      <a href=""><button type="button" class="btn btn-success">Book</button></a>
+    <div class="card-body" style="display: flex;">
+      <form action="">
+     <button type="submit" class="btn btn-info">Book</button>
+    </form>
+    <form action="/services/package" method="post">
+      {% csrf_token %}
+     <input type="hidden" value="{{item1.id}}" name="id">
+     <button type="submit" class="btn btn-success" style="margin-left: 10px;">More Info</button>
+    </form>
     </div>
   </div>
   {% endfor %}

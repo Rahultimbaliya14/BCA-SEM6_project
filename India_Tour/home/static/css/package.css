@@ -1,6 +1,12 @@
 .card2{
-    margin-left: 134px;
+    /* margin-left: 134px;
     margin-right: 134px;
-    margin-left: 134px;
+    margin-left: 134px; */
+    margin-left: 2px;
+    margin-right: 2px;
     margin-top: 50px;
+}
+.text-muted{
+    font-size: 17px;
+    font-weight: bolder;
 }
