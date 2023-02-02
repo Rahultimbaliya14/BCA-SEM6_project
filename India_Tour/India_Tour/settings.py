@@ -31,7 +31,6 @@ SECRET_KEY = 'django-insecure-62em4ma=+=0d00#aoygul$@+ibmt2o8#)n8og!$u=7e!@f64w1
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -99,18 +98,18 @@ DATABASES ={
     #     }
 
 
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'india_tour',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST':'localhost',
-        'PORT':'3306',
-    }
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'india_tour',
+            'USER': 'root',
+            'PASSWORD': '',
+            'HOST':'localhost',
+            'PORT':'3306',
+        }
 
 
 
-    # 'custome': {
+    # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }

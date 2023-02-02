@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect
 from users.models import Customer
 from django.contrib import messages
+import requests
+import json
 from django.core.mail import send_mail,EmailMultiAlternatives
 import random
 
@@ -36,26 +38,39 @@ def signup(request):
         otp2 = str(otp)
         print(otp2)
 
+        clientkey=request.POST['g-recaptcha-response']
+        secretkey='6Ldrj0MkAAAAABH016Obv_PagpFzfP2HOgOQ9v3v'
+        cptchadata={
+                'secret':secretkey,
+                'response':clientkey
+              }
+        r=requests.post('https://www.google.com/recaptcha/api/siteverify',data=cptchadata)
+        response=json.loads(r.text)
+        verify=response['success']
+        print(verify)
         #Fatch The File Name And It's Extension
         # imagename = image.name
         # ex = imagename.split('.')[1]
         # ex = ex.lower()
         # print(ex)
-
+        
         # Save The Data To The DataBase
         if not Customer.objects.filter(email=mail):
             if passw == cpass:
                 if len(passw) >= 8:
                         if len(phone) == 10:
-                            subject, from_email, to = 'Create Account', 'tour.india1414@gmail.com',mail
-                            text_content = 'This is an important message.'
-                            html_content = '<img src="https://cdn.pixabay.com/photo/2015/02/27/22/28/india-652857_960_720.png" alt="img"> <br> Hi '+name+' <br> Is Your One Time Password(OTP)<strong style="color:red;">'+otp2+ '</strong><br>Use For Craete The Account India_Tour'
-
-                            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-                            msg.attach_alternative(html_content, "text/html")
-                            msg.send()
-                            request.session['name']="gh"
-                            return redirect('email')
+                            if verify:
+                                 subject, from_email, to = 'Create Account', 'tour.india1414@gmail.com',mail
+                                 text_content = 'This is an important message.'
+                                 html_content = '<img src="https://cdn.pixabay.com/photo/2015/02/27/22/28/india-652857_960_720.png" alt="img"> <br> Hi '+name+' <br> Is Your One Time Password(OTP)<strong style="color:red;">'+otp2+ '</strong><br>Use For Craete The Account India_Tour'
+     
+                                 msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                                 msg.attach_alternative(html_content, "text/html")
+                                 msg.send()
+                                 request.session['name']="gh"
+                                 return redirect('email')
+                            else:
+                                messages.error(request, 'Captcha Is Not Verify')
                             
                         else:
                             messages.error(
@@ -79,19 +94,30 @@ def login(request):
         email = request.POST.get('email')
         passwd = request.POST.get('passwd')
         data = Customer.objects.filter(email=email).values()
-        print(data)
-        if data:
-            if data[0].get('password') == passwd:
-                request.session['id'] = data[0].get('id')
-                request.session['uname']=data[0].get('name')
-                request.session['uemail']=data[0].get('email')
-                return redirect('/')
-            else:
-                messages.error(request, 'Password Are Incorrect')
-                return redirect("login")
+        clientkey=request.POST['g-recaptcha-response']
+        secretkey='6Ldrj0MkAAAAABH016Obv_PagpFzfP2HOgOQ9v3v'
+        cptchadata={
+                'secret':secretkey,
+                'response':clientkey
+              }
+        r=requests.post('https://www.google.com/recaptcha/api/siteverify',data=cptchadata)
+        response=json.loads(r.text)
+        verify=response['success']
+        if verify:
+              if data:
+                  if data[0].get('password') == passwd:
+                      request.session['id'] = data[0].get('id')
+                      request.session['uname']=data[0].get('name')
+                      request.session['uemail']=data[0].get('email')
+                      return redirect('/')
+                  else:
+                      messages.error(request, 'Password Are Incorrect')
+                      return redirect("login")
+              else:
+                  messages.error(request, 'User Does Not Exist !!!!')
+                  return redirect("login")
         else:
-            messages.error(request, 'User Does Not Exist !!!!')
-            return redirect("login")
+            messages.error(request, 'Captcha Does Not Verify!!!!')
     if request.session['id']:
         messages.error(request,"Alredy Loged In")
         return redirect('/')
@@ -205,27 +231,40 @@ def forget(request):
     if request.method=="POST":
         email=request.POST.get('email')
         pwd=request.POST.get('password')
-        print(pwd,email)
         uemail=Customer.objects.filter(email=email).values()
+
+        clientkey=request.POST['g-recaptcha-response']
+        secretkey='6Ldrj0MkAAAAABH016Obv_PagpFzfP2HOgOQ9v3v'
+        cptchadata={
+                'secret':secretkey,
+                'response':clientkey
+              }
+        r=requests.post('https://www.google.com/recaptcha/api/siteverify',data=cptchadata)
+        response=json.loads(r.text)
+        verify=response['success']
+
         if not uemail:
             messages.error(request,"User Does Not Exist Please Enter Valid Email Address")
         else:
             if not len(pwd) < 8:
-                emailr=email
-                rpwd=pwd
-                otpr=random.randint(10000, 99999)
-                otpr2 = str(otpr)
-                print(rpwd,emailr,otpr2)
-                subject, from_email, to = 'Forget Password', 'tour.india1414@gmail.com',emailr
-                text_content = 'This is an important message.'
-                html_content = '<img src="https://cdn.pixabay.com/photo/2015/02/27/22/28/india-652857_960_720.png" alt="Img"> <br> Hi '+uemail[0].get('name')+' <br>   Is Your One Time Password(OTP) <strong style="color:red;">'+otpr2+ ' </strong>  Used To Reset The Password '
-                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-                msg.attach_alternative(html_content, "text/html")
-                h=msg.send()
-                if h:
-                    return redirect('emailr')
+                if verify:
+                      emailr=email
+                      rpwd=pwd
+                      otpr=random.randint(10000, 99999)
+                      otpr2 = str(otpr)
+                      print(rpwd,emailr,otpr2)
+                      subject, from_email, to = 'Forget Password', 'tour.india1414@gmail.com',emailr
+                      text_content = 'This is an important message.'
+                      html_content = '<img src="https://cdn.pixabay.com/photo/2015/02/27/22/28/india-652857_960_720.png" alt="Img"> <br> Hi '+uemail[0].get('name')+' <br>   Is Your One Time Password(OTP) <strong style="color:red;">'+otpr2+ ' </strong>  Used To Reset The Password '
+                      msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                      msg.attach_alternative(html_content, "text/html")
+                      h=msg.send()
+                      if h:
+                          return redirect('emailr')
+                      else:
+                         messages.error(request,"Some Technical Issue On The Server To Send The Massage")
                 else:
-                    messages.error(request,"Some Technical Issue On The Server To Send The Massage")
+                    messages.error(request,"Captcha Is Not Verify")
             else:
                 print("hello")
                 messages.error(request,"Password Should Be 8 Character Long !!!!")

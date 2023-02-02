@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ms+Madi&family=Qwitcher+Grypen&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/contact.css'%}">
-
     <div class="toast float-end" role="alert" aria-live="assertive" aria-atomic="true" style="margin-left: 740px; margin-top: 30px; position: absolute; left: 30px; background-color: lightgreen;">
         <div class="toast-header">
           <img src="{% static 'image/logo4.png'%}" class="rounded me-2" alt="..." height="20px" width="20px">
@@ -15,10 +14,12 @@
           <small class="text-muted"></small>
         </div>
         <div class="toast-body">
-          Your Request Submited Successfully
+            {% for message in messages %}
+            {{message}}
+            {% endfor %}
         </div>
       </div>
-
+     
     <div class="contact">
         <div class="content">
             <h2>Contact-Us</h2>
@@ -83,6 +84,7 @@
                         <textarea name="massage" id="" cols="15" rows="4" required placeholder="Enter Some Text ........"></textarea>
                         <h3>Type Your Massage</h3>
                     </div>
+        <div class="g-recaptcha" data-sitekey="6Ldrj0MkAAAAAASQKnw-QxEafe07-a1MgdW5ssqy"></div>
                     <div class="inputbox">
                         <input type="submit" value="Send">
                     </div>
@@ -94,6 +96,9 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"> </script>  
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"> </script> 
     {% if messages %}
     {% for message in messages %}

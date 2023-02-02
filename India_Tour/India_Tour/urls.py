@@ -32,6 +32,8 @@ urlpatterns = [
     
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
+handler404='home.views.Page_404'
+
 urlpatterns += staticfiles_urlpatterns()
 admin.site.site_header = "India_Tour"
 admin.site.index_title = "Welcome To Administrator Of India_Tour"
