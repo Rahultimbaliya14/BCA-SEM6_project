@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
-from users.models import Customer
+from users.models import Customer,Count
 from django.contrib import messages
+
 import requests
 import json
 from django.core.mail import send_mail,EmailMultiAlternatives
@@ -194,6 +195,7 @@ def email(request):
              new.email=mail
              new.password=passw
              new.save()
+
              return redirect('login')
          else:
              messages.error(request, 'Otp Are Incorrect')

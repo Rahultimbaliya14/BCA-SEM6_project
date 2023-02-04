@@ -7,10 +7,12 @@
     <script>alert("{{message}}")</script>
     {% endfor %}
     {% endif %}
+    <script src="https://kit.fontawesome.com/0f900b0930.js" crossorigin="anonymous"></script> 
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-<h1 class="text-center my-5 " style=" padding-top: 85px; text-shadow: #FC0 1px 0 10px; font-family: 'Dancing Script', cursive;"><u>Available Packages</u> </h1>
-<hr>
+<h1 class="text-center my-5 " style="  padding-top: 7.5rem; text-shadow: #FC0 1px 0 10px; font-family: 'Dancing Script', cursive; margin-top: 0 !important;"><u>Available Packages</u> </h1>
+<hr
 <link rel="stylesheet" href="{% static 'css/package.css'%}">
+{% if item %}
 {% for item1 in item %}
 <div class="card mb-2 card2 text-left ">
   <img src="http://127.0.0.1:8000/media/{{item1.image}}" class="card-img-top" alt="...">
@@ -22,6 +24,8 @@
 
       <strong style="margin-left: 30px;" >Included Places:</strong> <small class="text-muted">{{item1.Listofplace}}</small> 
 
+      <strong style="margin-left: 30px;" >Available Seet:</strong> <small class="text-muted">{{item1.Totalseet}}</small> 
+      
       <br><br>
       <div class="bu" style="display: flex;">
       <form action="/services/package"  method="post" style="margin-bottom: 10px;">
@@ -31,6 +35,7 @@
     </form> 
     <form action="/services/book"  method="post" style="margin-bottom: 10px;">
       {% csrf_token %}
+      <input type="hidden" value="{{item1.id}}" name="id">
       <button type="submit" style="margin-left: 30px;" class="btn btn-success">Book</button>
     </form> 
   </div>
@@ -38,4 +43,8 @@
   </div>
 </div>  
 {% endfor %}
+{% else %}
+
+<p style="margin-top: 30px; font-size: 30px; text-align: center;"><b><i class="fa-solid fa-question" style="color: red; font-size: 60px;"></i> &nbsp;Not Any Package Available <i class="fa-solid fa-question" style="color:red; font-size: 60px;"></i></b></p>
+{% endif %}
 {% endblock body %}

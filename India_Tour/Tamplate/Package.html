@@ -9,14 +9,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
 
-
-
  
 <div class="container" style="display: flex; margin-top: 100px;  margin-left: 40px;">
     <div class="image" style="display: flex; flex-direction: column; align-items: center; ">
         <img src="http://127.0.0.1:8000/media/{{item.image}}" alt="" style="height: 250px;    border-radius: 20px;">
         <div class="bu" style="margin-top: 30px;">
-        <input type="text" value="Book" style="width: 90px; color: white; background-color: orangered; border: none;" >
+        <form action="/services/book"  method="post" style="margin-bottom: 10px;">
+        {% csrf_token %}
+        <input type="hidden" value="{{item.id}}" name="id">
+        <input type="submit" value="Book" style="width: 90px; color: white; background-color: orangered; border: none;" >
+        </form>
     </div>
     </div>
     <div class="info" style="margin-left: 40px;">
@@ -25,8 +27,9 @@
     
         <h2>Date Of Start:<span  style="font-size: 25px; color: black;">  {{item.DateOfStart}}</span></h1>
         <h2>Included Place: <span  style="font-size: 25px; color: black;">{{item.Listofplace}}</span></h1>
+        <h2>Available Seet: <span  style="font-size: 25px; color: black;">{{item.Totalseet}}</span></h1>
 
-        <h2 style="color: lightcoral;">Price: <span  style="font-size: 25px; color: black;"> &#x20B9;{{item.Prise}}</span></h1>
+        <h2 style="color: lightcoral;">Price: <span style="font-size: 25px; color: black;"> &#x20B9;{{item.Prise}}</span></h1>
 
     </div>
 </div>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/page_404.scss'%}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/0f900b0930.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Patua+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
@@ -21,15 +22,15 @@
         <div class="manu" id="navbar">  
             <a href="/"><img src="{% static 'image/logo4.png'%}" alt="This Is Logo"></a>
             <ul>
-            <li><a href="/">HOME</a></li>
+            <li><a href="/"><i class="fa-solid fa-house"></i>&nbsp;HOME</a></li>
             <li><a href="/about">ABOUT</a></li>
             <li><a href="/services">SERVICES</a></li>
             {% if request.session.id %}
             <li><a href="/acount/logout">LOG-OUT</a></li>
             <li><a href="/acount/profile">PROFILE</a></li>
             {% else %}
-            <li><a href="/acount/signup">SIGN-UP</a></li>
-            <li><a href="/acount/login">LOGIN</a></li>
+            <li><a href="/acount/signup"><i class="fa-solid fa-user-plus"></i>&nbsp;SIGN-UP</a></li>
+            <li><a href="/acount/login"><i class="fa-solid fa-right-to-bracket"></i>&nbsp;LOGIN</a></li>
             {% endif %}
             </ul>
         </div>

@@ -10,4 +10,10 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
+class Count(models.Model):
+    totalvisitor=models.CharField(max_length=255)
+    tatalregister=models.CharField(max_length=225)
+    totalpackage=models.CharField(max_length=225)
+
+
         

@@ -14,26 +14,25 @@
   alert("Restricted")
 </script>
 {% endif %}
-<script src="https://kit.fontawesome.com/0f900b0930.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="{% static 'css/contact.css'%}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Moon+Dance&display=swap" rel="stylesheet">
 
 {% include 'header.html '%}
-<div class="container-fluid px-0 my-0">
+<div class="container-fluid px-0 my-0" >
   <div id="carouselExampleFade " class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item active">
+      <div class="carousel-item active" style="margin-top: -30px;">
         <p class="ptext"><h1 class="ptext">hello</h1></p>
         <p class="ptext">hwll </p>  
         <img src="https://source.unsplash.com/random/1920x1080/?wallpaper,landscape'" class="d-block w-100" alt="...">
       </div>
       
-      <div class="carousel-item">
+      <div class="carousel-item" style="margin-top: -35px">
         <p class="ptext"><h1 class="ptext">hello</h1></p>
         <p class="ptext">hwll </p>  
         <img src="https://source.unsplash.com/random/1920x1080/?sun'" class="d-block w-100" alt="...">
       </div>
-      <div class="carousel-item">
+      <div class="carousel-item" style="margin-top: -30px;">
         <p class="ptext"><h1 class="ptext">hello</h1></p>
         <p class="ptext">hwll </p>    
         <img src="https://source.unsplash.com/random/1920x1080/?india'" class="d-block w-100" alt="...">
@@ -43,6 +42,7 @@
 </div>
 
 <div class="Card-c px-1 my-4">
+  {% if item%}
   {% for item1 in item %}
   <div class="card" style="width: 18rem;">
     <img src="http://127.0.0.1:8000/media/{{item1.image}}" class="card-img-top" alt="..." width="200px" height="200px">
@@ -56,9 +56,11 @@
       <li class="list-group-item">Starting Date: <b>{{item1.DateOfStart}}</b></li>
     </ul>
     <div class="card-body" style="display: flex;">
-      <form action="">
+    <form action="/services/book" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{item1.id}}" name="id">
      <button type="submit" class="btn btn-info">Book</button>
-    </form>
+     </form>
     <form action="/services/package" method="post">
       {% csrf_token %}
      <input type="hidden" value="{{item1.id}}" name="id">
@@ -67,6 +69,11 @@
     </div>
   </div>
   {% endfor %}
+  {% else %}
+
+  <p style="margin-top: 30px; font-size: 30px;"><b><i class="fa-solid fa-question" style="color: red; font-size: 60px;"></i> &nbsp;Not Any Package Available <i class="fa-solid fa-question" style="color:red; font-size: 60px;"></i></b></p>
+  
+  {% endif %}
 </div>
 
 
@@ -134,6 +141,7 @@
                   <textarea name="massage" id="" cols="15" rows="4" required placeholder="Enter Some Text ........"></textarea>
                   <h3>Type Your Massage</h3>
               </div>
+              <div class="g-recaptcha" data-sitekey="6Ldrj0MkAAAAAASQKnw-QxEafe07-a1MgdW5ssqy"></div>
               <div class="inputbox">
                   <input type="submit" value="Send">
               </div>
@@ -141,4 +149,21 @@
       </div>
   </div>
 </div>
+
+<div class="counter">
+  <div class="Sub">
+    <div class="text">Total Visitor</div>
+  <p>{{totalvisitor}}</p>
+  </div>
+  <div class="Sub">
+    <div class="text">Total Registerd</div>
+    <p class="text-center">{{tatalregister}}</p>
+  </div>
+  <div class="Sub">
+    <div class="text">Total Package</div>
+    <p>{{totalpackage}}</p>
+  </div>
+</div>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 {% endblock body %}

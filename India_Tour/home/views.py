@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from package.models import Package
 from .models import Contact
+from users.models import Count,Customer
 import requests
 import json
 from django.contrib import messages
@@ -9,14 +10,36 @@ from django.core.mail import send_mail,EmailMultiAlternatives
 
 # Create your views here.
 def index(request):
+       data=Count.objects.all().values()
+       totalvisitor=int(data[0].get('totalvisitor'))
+       updatedtotalvisitor=totalvisitor+1
+       updatedata=Count.objects.get(id=1)
+       updatedata.totalvisitor=updatedtotalvisitor
+       updatedata.save()
+      
+
+       totalregisteruser=int(len(Customer.objects.all()))
+       updaterigester=Count.objects.get(id=1)
+       updaterigester.tatalregister=totalregisteruser
+       updaterigester.save()
+
+       totalpackage=int(len(Package.objects.all()))
+       updatepackage=Count.objects.get(id=1)
+       updaterigester.totalpackage=totalpackage
+       updaterigester.save()
+
        fatch=Package.objects.all().order_by('-id')[:3]
-       print(fatch[0].Title)
-       contex={
-              "item":fatch
-       }
-       request.session['name']="ghelo"
-       
-       return render(request,'index.html' ,contex)
+       if fatch:
+          contex={
+                 "totalpackage":totalpackage,
+                 "tatalregister":totalregisteruser,
+                 "totalvisitor":updatedtotalvisitor,
+                 "item":fatch
+          }
+          request.session['name']="ghelo"
+          return render(request,'index.html' ,contex)
+       else:
+              return render(request,'index.html')
 def about(request):
        return render(request,'about.html')
 
