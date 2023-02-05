@@ -1,19 +1,95 @@
+{%extends 'base.html'%}
+{%load static%}
+{% block body %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/book.css'%}">
     <title>Document</title>
 </head>
 <body>
 
-    {{item.Title}}
+    <!-- {{item.Title}}
     {{item.Discription}}
     {{item.DateOfStart}}
-    {{item.Prise}}
-    {{item.Listofplace}}
-    {{item.Totalseet}}
+    {{item.Prise}} -->
+    {{item.id}}
 
+    <!-- {{item.Listofplace}}
+    {{item.Totalseet}} -->
+    <center>
+        <div class="container">
+            <div class="container_detail">
+                <br>
+                <h2 class="hading">Package Name</h2>
+                <h3 class="day"> {{item.Title}}</h3>
+
+                <br>
+                <p>------------------------</p>
+                <h2 class="hading">Info</h2>
+                <h4 class="price">DateOfStart - <spam>{{item.DateOfStart}}</spam>
+                </h4>
+                <h4 class="price">AvailableSheet- <spam>{{item.Totalseet}}</spam>
+                </h4>
+
+                <h4 class="price">Price -<spam> &#8377;{{item.Prise}}</spam>
+                </h4>
+                
+
+                <br>
+
+            </div>
+
+            <div class="container_form">
+                <form action="" method="post">
+                    {% csrf_token %} 
+                    <h2 class="hading">Online Booking</h2>
+                        {% if messages%}
+                        {% for message in messages %}
+                        <p class="error"><i class="fa-solid fa-triangle-exclamation"></i><span>*</span>{{message}}<span>*</span></p>
+                        {% endfor %}
+                        {% endif %}
+                    <div class="field">
+                        <p>Your Name:</p>
+                        <input type="text" placeholder="Your Name" name="name" id="name" value="{{request.session.uname}}" required>
+                    </div>
+                    <div class="field">
+                        <p>Your Email:</p>
+                        <input type="email" placeholder="Your Email" name="email" id="email" value="{{request.session.uemail}}" readonly>
+                    </div>
+                   
+                    <div class=" select1">
+                        
+                    </div>
+                    <div class="select1">
+                        <p>Total Person:</p>
+                        <select name="Totalperson" id="SE">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div class="select1">
+                        <input type="hidden" name="packageid" value="{{item.id}}">
+                        <input type="hidden" name="packagename" value="{{item.Title}}">
+                        <input type="hidden" name="packageamount" value="{{item.Prise}}">
+                    </div>
+                    <div class="btn">
+                        <button type="submit" name="submit" id="submit">Book</button>
+                    </div>
+                </form>
+            </div>
+        </div>  
 </body>
 </html>
+{% endblock body %}

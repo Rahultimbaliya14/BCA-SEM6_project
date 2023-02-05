@@ -19,26 +19,28 @@
     <title>{% block title %}{% endblock title %} | India_Tour</title>
 </head>
 <body style="background-color: lightcyan;">
-        <div class="manu" id="navbar">  
+        <div class="manu" id="navbar" style="color: white;">  
             <a href="/"><img src="{% static 'image/logo4.png'%}" alt="This Is Logo"></a>
             <ul>
-            <li><a href="/"><i class="fa-solid fa-house"></i>&nbsp;HOME</a></li>
-            <li><a href="/about">ABOUT</a></li>
-            <li><a href="/services">SERVICES</a></li>
+            <li id="mitem"><a href="/" id="mitem" ><i class="fa-solid fa-house"></i>&nbsp;HOME</a></li>
+            <li id="mitem"><a href="/about">ABOUT</a></li>
+            <li id="mitem"><a href="/services">SERVICES</a></li>
+            
             {% if request.session.id %}
-            <li><a href="/acount/logout">LOG-OUT</a></li>
-            <li><a href="/acount/profile">PROFILE</a></li>
+            <li id="mitem"><a href="/acount/logout">LOG-OUT</a></li>
+            <li id="mitem"><a href="/acount/profile">PROFILE</a></li>
             {% else %}
-            <li><a href="/acount/signup"><i class="fa-solid fa-user-plus"></i>&nbsp;SIGN-UP</a></li>
-            <li><a href="/acount/login"><i class="fa-solid fa-right-to-bracket"></i>&nbsp;LOGIN</a></li>
+            <li id="mitem"><a href="/acount/signup"><i class="fa-solid fa-user-plus"></i>&nbsp;SIGN-UP</a></li>
+            <li id="mitem"><a href="/acount/login"><i class="fa-solid fa-right-to-bracket"></i>&nbsp;LOGIN</a></li>
             {% endif %}
+            <li id="mitem" style="font-size: 24px;">&#127763; <button class="dark">a</button></li>
             </ul>
         </div>
 
 
     {% block body %}{% endblock body %}
 
-    <div class="footer-basic" style="background-color: lightcyan;">
+    <div class="footer-basic"  id="footer" style="background-color: lightcyan;">
         <footer>
             <div class="social"><a href="https://github.com/Rahultimbaliya14"><i class="icon ion-social-github"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
             <ul class="list-inline">
@@ -54,6 +56,48 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+
+
+  <script>
+      const name2=window.localStorage.getItem('name');
+      if (name2 == "Obaseki"){
+
+        document.getElementById('footer').style.backgroundColor = 'lightcyan'
+        document.getElementById('navbar').style.backgroundColor = 'lightcyan'
+
+
+        document.querySelector('.dark').style.color="black"
+        document.querySelector('.dark').innerHTML="Dark"
+        
+      
+
+        const element = document.getElementById("navbar");
+          for (let i = 0; i < 6; i++) {
+            const nodes = element.getElementsByTagName("a")[i].style.color="black";
+          }
+
+        document.body.style.backgroundColor = 'lightcyan'
+      }
+      else{
+        document.getElementById('footer').style.backgroundColor = '#16213E'
+        document.getElementById('navbar').style.backgroundColor = '#16213E'
+
+
+
+
+        document.querySelector('.dark').style.color="white"
+        document.querySelector('.dark').innerHTML="Light"
+
+        const element = document.getElementById("navbar")
+          for (let i = 0; i < 6; i++) {
+            const nodes = element.getElementsByTagName("a")[i].style.color="white";
+          }
+
+        document.body.style.backgroundColor = '#16213E'
+      }
+  </script>
+
 
 <script>
 window.onscroll = () => {
@@ -72,5 +116,57 @@ myFunction = () => {
   }
 }
 </script>
+
+
+
+<script>
+        const d=document.querySelector('.dark')
+        d.addEventListener("click", function(e) {
+        const name=window.localStorage.getItem('name')
+
+        if (name=="Obaseki"){
+          console.log('hello')
+           document.body.style.backgroundColor = '#16213E'
+
+           document.getElementById('footer').style.backgroundColor = '#16213E'
+           document.getElementById('navbar').style.backgroundColor = '#16213E'
+             
+
+
+           document.querySelector('.dark').style.color="white"
+           document.querySelector('.dark').innerHTML="Light"
+
+          const element = document.getElementById("navbar");
+          for (let i = 0; i < 6; i++) {
+            const nodes = element.getElementsByTagName("a")[i].style.color="white";
+          }
+          
+           window.localStorage.setItem('name', 'Baka');
+           
+        }
+        else {
+          document.body.style.backgroundColor = 'lightcyan'
+
+          document.getElementById('footer').style.backgroundColor = 'lightcyan'
+          document.getElementById('navbar').style.backgroundColor = 'lightcyan'
+
+
+
+          document.querySelector('.dark').style.color="black"
+          document.querySelector('.dark').innerHTML="Dark"
+
+          const element = document.getElementById("navbar");
+          for (let i = 0; i < 6; i++) {
+            const nodes = element.getElementsByTagName("a")[i].style.color="black";
+          }
+          
+          window.localStorage.setItem('name', 'Obaseki');
+        }
+      
+}, false);
+</script>
+
+
+
 </body>
 </html>

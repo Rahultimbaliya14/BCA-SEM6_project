@@ -18,12 +18,36 @@ def service(request):
 def book(request):
     if request.method=='POST':
         id=request.POST.get('id')
-        print(id)
-        data=Package.objects.filter(id=id).values()
-        print(data)
+        
+        request.session['packageid']=id
+        return redirect('book2')
+    else:
+        return redirect('/')
+
+def book2(request):
+    if request.method=="POST":
+        username=request.POST['name']
+        useremail=request.POST['email']
+        TotalPerson=request.POST['Totalperson']
+        packageid=request.POST['packageid']
+        packagename=request.POST['packagename']
+        packageamount=request.POST['packageamount']
+        TotalPerson=int(TotalPerson)
+        packageamount=int(packageamount)
+        totalamount=packageamount*TotalPerson
+        print(packageid)
+        fatch=Package.objects.filter(id=packageid).values()
+        availableseet=int(fatch[0].get('Totalseet'))
+        if TotalPerson>availableseet:
+            messages.error(request,"Only %d  Sheet left" %availableseet)
+        else:
+            print("hello")
+
+    if not request.session['packageid']=="":
+        data=Package.objects.get(id=request.session['packageid'])
         context={
-            "item":data[0]
-        }
+            'item':data
+        } 
         return render(request,'Book.html',context)
     else:
         return redirect('/')

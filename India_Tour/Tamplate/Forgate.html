@@ -32,7 +32,7 @@
                         <div class="panel-body">
                             <div class="text-center">
                                 <h3><i class="fa fa-lock fa-4x"></i></h3>
-                                <h2 class="text-center">Forgot Password?</h2>
+                                <h2 class="text-center ">Forgot Password?</h2>
                                 <p>You can reset your password here.</p>
                                 <div class="panel-body">
 
@@ -66,7 +66,16 @@
         border-radius: 69px !important;    border: 2px solid lightgray !important; ">
         </div>
     </div>
-    
+    <script>
+        const name=window.localStorage.getItem('name')
+        if (name=="Obaseki"){
+            
+        }
+        else{
+            document.body.style.backgroundColor = '#16213E'
+            document.querySelector('.text-center').style.color="white"
+        }
+    </script>
     {% if messages %}
     {% for message in messages %}
     <script>

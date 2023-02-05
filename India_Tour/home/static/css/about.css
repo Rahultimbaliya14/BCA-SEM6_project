@@ -1,0 +1,75 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-sizing: border-box;
+}
+.about{
+   width: 100%;
+   padding: 78px 0px;
+}
+.about iframe{
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.3);
+    width: 500px;
+    height: 500px;
+
+}
+.about .about-text{
+    width: 550px;
+}
+.main{
+    width: 1130px;
+    max-width: 95%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.about-text h1{
+    color: orangered;
+    font-size: 80px;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+.about-text h5{
+    color: black;
+    font-size: 25px;
+    text-transform: capitalize;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+}
+
+.span1{
+    color: #f9084d;
+}
+.about-text p{
+    color: rgba(0, 0, 0, 0.9);
+    letter-spacing: 2px;
+    line-height: 22px;
+    font-size: 18px;
+    margin-bottom: 35px;
+}
+button{
+    background: #f9084d;
+    border: 2px solid transparent;
+    padding: 13px 30px;
+    border-radius: 30px;
+    transition: -4s;
+    
+}
+.bu a{
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+.bu:hover{
+    background: black;
+    border: 2px solid #f9084d;
+    cursor: pointer;
+    color:#f9084d ;
+}
+.bu a:hover{
+    color: #f9084d;
+}
+
+

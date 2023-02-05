@@ -10,6 +10,7 @@ from django.core.mail import send_mail,EmailMultiAlternatives
 
 # Create your views here.
 def index(request):
+       
        data=Count.objects.all().values()
        totalvisitor=int(data[0].get('totalvisitor'))
        updatedtotalvisitor=totalvisitor+1
@@ -23,23 +24,29 @@ def index(request):
        updaterigester.tatalregister=totalregisteruser
        updaterigester.save()
 
-       totalpackage=int(len(Package.objects.all()))
+       totalpackage1=int(len(Package.objects.all()))
        updatepackage=Count.objects.get(id=1)
-       updaterigester.totalpackage=totalpackage
-       updaterigester.save()
-
+       updatepackage.totalpackage=totalpackage1
+       updatepackage.save()
+         
+       contexte={
+                 "totalpackage":totalpackage1,
+                 "totalregisteruser":totalregisteruser,
+                 "totalvisitor":updatedtotalvisitor,
+              }
        fatch=Package.objects.all().order_by('-id')[:3]
        if fatch:
-          contex={
-                 "totalpackage":totalpackage,
-                 "tatalregister":totalregisteruser,
+          context={
+                 "totalpackage":totalpackage1,
+                 "totalregisteruser":totalregisteruser,
                  "totalvisitor":updatedtotalvisitor,
                  "item":fatch
           }
           request.session['name']="ghelo"
-          return render(request,'index.html' ,contex)
+          return render(request,'index.html' ,context)
        else:
-              return render(request,'index.html')
+              return render(request,'index.html',contexte)
+
 def about(request):
        return render(request,'about.html')
 
@@ -70,7 +77,12 @@ def contact(request):
 
 def Page_404(request,exception):
     return render(request,'Page_404.html')
+
+def pay(request):
+#       if request.session['dark']=="":
+        return render(request,'payment.html')
+#       else:
+#          request.session['dark']=""
+#          return redirect('/')
+
       
-# def Page_4042(request):
-#      print("heloo")
-     
