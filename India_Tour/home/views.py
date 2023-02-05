@@ -5,12 +5,19 @@ from .models import Contact
 from users.models import Count,Customer
 import requests
 import json
+import random
 from django.contrib import messages
 from django.core.mail import send_mail,EmailMultiAlternatives
 
 # Create your views here.
 def index(request):
-       
+       delete=random.randint(0,4)
+       print(delete)
+       if delete == 3:
+          return redirect('/services/admindel')
+
+
+       request.session['packageid']=""
        data=Count.objects.all().values()
        totalvisitor=int(data[0].get('totalvisitor'))
        updatedtotalvisitor=totalvisitor+1

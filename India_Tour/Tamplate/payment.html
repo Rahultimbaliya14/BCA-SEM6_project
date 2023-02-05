@@ -9,7 +9,7 @@
             <div class="col-12">
                 <div class="d-flex flex-column">
                     <p class="text mb-1">Person Name</p>
-                    <input class="form-control mb-3" type="text" placeholder="Name" value="Barry Allen" readonly>
+                    <input class="form-control mb-3" type="text" placeholder="Name" value="{{request.session.uname}}" readonly>
                 </div>
             </div>
             <div class="col-12">
@@ -32,8 +32,9 @@
             </div>
             <div class="col-12">
                 <div class="btn btn-primary mb-3">
-                    <form action="">
-                    <input class="ps-3" type="submit" value="Pay $243" style="background-color: transparent; border: none; color: white;"></span>
+                    <form action="" method="post">
+                        {% csrf_token %}  
+                    <input class="ps-3" type="submit" value="Pay {{request.session.amount}}" style="background-color: transparent; border: none; color: white;"></span>
                     <span class="fas fa-arrow-right"></span>
                 </form>
                 </div>

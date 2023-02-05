@@ -44,7 +44,13 @@
                                                     <span class="input-group-addon">
                                                         <i class="glyphicon glyphicon-envelope color-blue"></i></span>
 
-                                                    <input id="emailInput" name="email" placeholder="Email Address" class="form-control" type="email"oninvalid="setCustomValidity('Please enter a valid email address!')" onchange="try{setCustomValidity('')}catch(e){}" required="" style="border: 2px solid lightseagreen; border-radius: 11px;">
+                                                    {% if request.session.id %}
+                                                    <input id="emailInput" name="email" placeholder="Email Address" class="form-control" value="{{request.session.uemail}}" type="email"oninvalid="setCustomValidity('Please enter a valid email address!')" onchange="try{setCustomValidity('')}catch(e){}" required="" style="border: 2px solid lightseagreen; border-radius: 11px;">
+                                                    
+                                                    {% else %}
+                                                    <input id="emailInput" name="email" placeholder="Email Address" class="form-control"  type="email"oninvalid="setCustomValidity('Please enter a valid email address!')" onchange="try{setCustomValidity('')}catch(e){}" required="" style="border: 2px solid lightseagreen; border-radius: 11px;">
+                                                    {% endif %}
+
                                                     <input id="emailInput" name="password" placeholder="New Password"class="form-control" type="password" required=""style="border: 2px solid lightseagreen; border-radius: 11px; margin-left: 3px;">
                                                 </div>
                                             </div>

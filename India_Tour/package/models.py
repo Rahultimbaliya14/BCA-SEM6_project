@@ -20,6 +20,7 @@ class Book(models.Model):
     dateofbook=models.DateField(max_length=225)
     Totalamount=models.CharField(max_length=225)
     Totalperson=models.CharField(max_length=225)
+    ConfermationNumber=models.CharField(max_length=225)
 
     def __str__(self):
         return self.Packagename
