@@ -2,7 +2,7 @@
 
 <body style="background-color: lightgrey;">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="{% static 'css/forget.css'%}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -36,7 +36,7 @@
                                 <p>You can reset your password here.</p>
                                 <div class="panel-body">
 
-                                    <form class="form" action="" method="post">
+                                    <form class="form" action="" method="post" onsubmit="valid()">
                                         {% csrf_token %}
                                         <fieldset>
                                             <div class="form-group">
@@ -56,9 +56,9 @@
                                             </div>
     <div class="g-recaptcha" data-sitekey="6Ldrj0MkAAAAAASQKnw-QxEafe07-a1MgdW5ssqy" style="margin-left: 60px; margin-bottom: 10px;"></div>
 
-                                            <div class="form-group">
-                                                <input class="btn btn-lg btn-block " value="Reset"type="submit" style="background-color: lightseagreen;">
-                                            </div>
+    <button class="tn btn-lg btn-block save-btn" style="background-color: lightseagreen;">
+        Reset
+      </button>
                                         </fieldset>
                                     </form>
 
@@ -72,6 +72,17 @@
         border-radius: 69px !important;    border: 2px solid lightgray !important; ">
         </div>
     </div>
+    <script>
+        btn=document.querySelector(".save-btn")
+        function valid() {
+          btn.innerHTML="<div class='loader'></div>&nbsp;<span style='color:black;'>Sending OTP....</span>"
+          btn.style="background-color:#f1f5f4; pointer-events:none"
+          setTimeout(()=>{
+            btn.innerHTML="<span style='color:green;'>OTP SEND &#10004;</span>"
+      
+          },5000);
+        }
+      </script>
     <script>
         const name=window.localStorage.getItem('name')
         if (name=="Obaseki"){

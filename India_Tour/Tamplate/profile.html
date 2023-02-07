@@ -8,6 +8,18 @@
   <h5 class="text-center">{{ message }}</h5>
   {% endfor %}
 {% endif %}
+<!-- {% if packagedata %}
+{% for item in packagedata %}
+{{item.Packagename}}
+{{item.Packageid}}
+{{item.Username}}
+{{item.Useremail}}
+{{item.dateofbook}}
+{{item.Totalamount}}
+{{item.Totalperson}}
+{{item.ConfermationNumber}}
+{% endfor %}
+{% endif %} -->
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
     <div class="container my-3" style="padding-top: 100px;">
@@ -68,18 +80,24 @@
                                 </div>
                             </div>
                             <hr>
-                            <br>
-                            <br>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h5>Your Booked Package</h5>
+                                </div>
+                                
+                               
+                            </div>
                             <div class="row">
                                 <div class="col-md-9 text-secondry">
                                     <button type="submit" class="btn btn-info">Update</button>
                                     &nbsp;&nbsp;
                                     <a href="forget" class="btn btn-info">Forget Password</a>
                                     &nbsp;&nbsp;
-                                    <a href="unregister" class="btn btn-info">Unregister</a>
+                                    <a href="unregister" class="btn btn-info save-btn ">Unregister</a>
                                 </div>
                                
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -88,5 +106,14 @@
     </div>
 </form>
 </body>
+<script>
+btn=document.querySelector(".save-btn")
+   btn.onclick=function() {
+  btn.innerHTML="<div class='loader'></div>&nbsp;<span style='color:black;'>Sending OTP....</span>"
+  btn.style="background-color:#f1f5f4; pointer-events:none"
+  setTimeout(()=>{
+    btn.innerHTML="<span style='color:green;'>OTP SEND &#10004;</span>"
+  },4000);
+}
+</script>
 {% endblock body %}
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus quam voluptatibus ipsam quae? Nemo, voluptates ab sit pariatur quasi, non animi ex tempora veritatis, blanditiis corrupti vero molestiae ea aliquam adipisci nesciunt voluptas mollitia. Itaque similique aperiam nobis ullam sunt porro, aut odit a, necessitatibus doloribus esse quia ea magnam beatae molestias earum consequatur eligendi harum eius voluptatem perspiciatis commodi sint soluta. Assumenda impedit adipisci provident nihil consequatur obcaecati corrupti! Pariatur nulla iste veniam labore eos, quaerat, voluptatum dicta sequi id ducimus dolorem fugiat, fugit magnam doloremque ipsum facere at placeat distinctio sit consequatur? Quae quisquam dolor ea facilis similique!

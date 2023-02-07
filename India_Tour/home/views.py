@@ -4,6 +4,7 @@ from package.models import Package
 from .models import Contact
 from users.models import Count,Customer
 import requests
+from datetime import date
 import json
 import random
 from django.contrib import messages
@@ -11,10 +12,18 @@ from django.core.mail import send_mail,EmailMultiAlternatives
 
 # Create your views here.
 def index(request):
-       delete=random.randint(0,4)
-       print(delete)
-       if delete == 3:
-          return redirect('/services/admindel')
+       data=Package.objects.all().values()
+       for d in data:
+         print("dels")     
+         dater=d['DateOfStart']
+         current=date.today()
+         if current>dater:
+            deletepakage=Package.objects.get(id=d['id'])
+            deletepakage.delete()
+       # delete=random.randint(0,2)
+       # print(delete)
+       # if delete == 1:
+       #    return redirect('/services/admindel')
 
 
        request.session['packageid']=""

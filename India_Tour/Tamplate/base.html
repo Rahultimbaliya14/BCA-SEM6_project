@@ -18,8 +18,8 @@
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <title>{% block title %}{% endblock title %} | India_Tour</title>
 </head>
-<body style="background-color: lightcyan;">
-        <div class="manu" id="navbar" style="color: white;">  
+<body style="background-color: lightcyan; transition: 1s;">
+        <div class="manu" id="navbar" style="color: white;  transition: 1s;">  
             <a href="/"><img src="{% static 'image/logo4.png'%}" alt="This Is Logo"></a>
             <ul>
             <li id="mitem"><a href="/" id="mitem" ><i class="fa-solid fa-house"></i>&nbsp;HOME</a></li>
@@ -40,7 +40,7 @@
 
     {% block body %}{% endblock body %}
 
-    <div class="footer-basic"  id="footer" style="background-color: lightcyan;">
+    <div class="footer-basic"  id="footer" style="background-color: lightcyan; transition: 1s;" >
         <footer>
             <div class="social"><a href="https://github.com/Rahultimbaliya14"><i class="icon ion-social-github"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
             <ul class="list-inline">

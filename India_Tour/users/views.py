@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from users.models import Customer,Count
+from package.models import Book
 from django.contrib import messages
 
 import requests
@@ -166,12 +167,23 @@ def profile(request):
     if not id == "":
         id = request.session['id']
         data = Customer.objects.filter(id=id).values()
-        context = {
+        datapac=Book.objects.filter(Useremail=request.session['uemail'])
+        if datapac:
+            context = {
             'image': data[0].get('image'),
             'name': data[0].get('name'),
             'email': data[0].get('email'),
             'mobile': data[0].get('mobile'),
-            'css':"sjfhdsffj"
+            'packagedata':datapac
+        }
+            return render(request, 'profile.html', context)
+        else:
+         context = {
+            'image': data[0].get('image'),
+            'name': data[0].get('name'),
+            'email': data[0].get('email'),
+            'mobile': data[0].get('mobile'),
+            
 
         }
         return render(request, 'profile.html', context)

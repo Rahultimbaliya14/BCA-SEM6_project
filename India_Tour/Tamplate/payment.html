@@ -1,6 +1,7 @@
 {% load static%}
-<link rel="stylesheet" href="{% static 'css/about.css'%}">
+<!-- <link rel="stylesheet" href="{% static 'css/about.css'%}"> -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="{% static 'css/forget.css'%}">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 <div class="container p-0">
     <div class="card px-4">
@@ -31,16 +32,28 @@
                 </div>
             </div>
             <div class="col-12">
-                <div class="btn btn-primary mb-3">
+                <div class="mb-3">
                     <form action="" method="post">
                         {% csrf_token %}  
-                    <input class="ps-3" type="submit" value="Pay {{request.session.amount}}" style="background-color: transparent; border: none; color: white;"></span>
-                    <span class="fas fa-arrow-right"></span>
+                        <button class="btn btn-primary  save-btn">
+                            Pay &#8377;{{request.session.amount}}
+                          </button>
                 </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    btn=document.querySelector(".save-btn")
+    btn.onclick=function() {
+      this.innerHTML="<div class='loader'></div>&nbsp;<span style='color:black;'>Processing....</span>"
+      this.style="background-color:#f1f5f4; pointer-events:none"
+      setTimeout(()=>{
+        this.innerHTML="<span style='color:green;'>Package Booked &#10004;</span>"
+  
+      },4000);
+    }
+  </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
