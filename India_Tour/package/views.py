@@ -97,7 +97,7 @@ def payment(request):
         save.ConfermationNumber=confermationnumber
         save.save()
         confo=str(confermationnumber)
-        subject, from_email, to = 'Package Is Succesfully Booked', 'tour.india1414@gmail.com',useremail
+        subject, from_email, to = 'Package Is Succesfully Booked', 'tour.india142@gmail.com',useremail
         text_content = 'This is an important message.'
         html_content = '<img src="https://cdn.pixabay.com/photo/2015/02/27/22/28/india-652857_960_720.png" alt="Img"> <br> Hi '+username+' <br>  Your Package  Is Successfully Booked With Confermation Number <strong style="color:red;">'+confo+ ' </strong>  Save This Confermation Number To Further Comunication'
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
@@ -136,3 +136,19 @@ def deletep(request):
             deletepakage.delete()
     return redirect("/")
 
+def showpackage(request):
+    if request.method=="POST":
+        data=Book.objects.get(id=request.POST.get('id'))
+        data2=Book.objects.filter(id=request.POST.get('id')).values()
+        # print(data2[0].get('Packageid'))
+        # print(data)
+        data3=Package.objects.filter(id=data2[0].get('Packageid')).values()
+        # print(data3[0].get('image'))
+        context={
+            'image':data3[0].get('image'),
+            'item':data
+        }
+        return render(request,'packageinfo.html',context)
+    else:
+        messages.error(request,"Please Select The Package That You Book")
+        return redirect('/acount/profile')

@@ -5,7 +5,7 @@
 <body>
     {% if messages %}
   {% for message in messages %}
-  <h5 class="text-center">{{ message }}</h5>
+  <script>alert('{{ message }}')</script>
   {% endfor %}
 {% endif %}
 <!-- {% if packagedata %}
@@ -81,13 +81,6 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-md-3">
-                                    <h5>Your Booked Package</h5>
-                                </div>
-                                
-                               
-                            </div>
-                            <div class="row">
                                 <div class="col-md-9 text-secondry">
                                     <button type="submit" class="btn btn-info">Update</button>
                                     &nbsp;&nbsp;
@@ -95,16 +88,34 @@
                                     &nbsp;&nbsp;
                                     <a href="unregister" class="btn btn-info save-btn ">Unregister</a>
                                 </div>
-                               
                             </div>
                             
+                        </form>
+                        
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px; background-color: white; border-radius: 10px;">
+                        <div class="col-md-3">
+                            <div class="text" style="display: flex; flex-direction: column;">
+                            <h5 style="margin-top: 10px; width: 200px;">Your Booked Package</h5>
+                            <hr>
+                            {% for item in packagedata %}
+                            <form action="/services/packageinfo" method="post">
+                                {% csrf_token %}
+                                <p class="text-center" style="font-weight: bolder;">{{item.Packagename}}</p> 
+                                 <input type="hidden" name="id" value="{{item.id}}">
+                                <input type="submit" style="margin-bottom: 10px;" class="btn btn-success" value="Show">
+                            </form>
+                            {% endfor %}
+                        </div>
+                            <hr>
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
-</form>
 </body>
 <script>
 btn=document.querySelector(".save-btn")
