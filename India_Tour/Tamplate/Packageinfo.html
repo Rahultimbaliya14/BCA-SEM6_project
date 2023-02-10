@@ -1,32 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
     <div class="main ">
-        <div class="info">
-            <img src="http://127.0.0.1:8000/media/package/background1_KsJMWQb.jpg" alt="">
-            <p> <b> Confirmation Number </b> </p>
-            {{item.ConfermationNumber}}
-            <p> <b> Package Name </b> </p>
-            {{item.Packagename}}
-            <p> <b> Name </b> </p>
-            {{item.Username}}
-            <p> <b> Email</b> </p>
-            {{item.Useremail}}
-            <p> <b> Total Amount </b> </p>
-            {{item.Totalamount}}
-            <p> <b> Total Person</b> </p>
-            {{item.Totalperson}}
-            <p> <b> Date Of Book </b> </p>
-            {{item.dateofbook}}
-         <input type="button" class="btn-print" value="Print" onclick="print()">
+        <div class="info" style="display: flex; flex-direction: column; align-items: center;">
+            <img src="http://127.0.0.1:8000/media/{{image}}" alt="" width="600px" style="border-radius: 40px;">
+            <p class="text"> <b style="font-size: 30px; color: orangered;"> Confirmation Number :: </b><b
+                    style="font-size: 23px;">{{item.ConfermationNumber}} </b></p>
+            <hr style="width: 500px;">
+            <p> <b style="font-size: 30px; color: orangered;"> Package Name:: </b><b
+                    style="font-size: 23px;">{{item.Packagename}}</b> </p>
+            <hr style="width: 350px;">
+            <p> <b style="font-size: 30px; color: orangered;"> Name:: </b> <b
+                    style="font-size: 23px;">{{item.Username}}</b> </p>
+            <hr style="width: 200px; color: rgba(0, 0, 0, 0.7);">
+            <p> <b style="font-size: 30px; color: orangered;"> Email:: </b><b
+                    style="font-size: 23px;">{{item.Useremail}}</b> </p>
+            <hr style="width: 500px; color: rgba(0, 0, 0, 0.7);">
+            <p> <b style="font-size: 30px; color: orangered;"> Total Amount:: </b> <b
+                    style="font-size: 23px;">{{item.Totalamount}}</b></p>
+            <hr style="width: 300px; color: rgba(0, 0, 0, 0.7);">
+            <p> <b style="font-size: 30px; color: orangered;"> Total Person:: </b> <b
+                    style="font-size: 23px; ">{{item.Totalperson}}</b></p>
+            <hr style="width: 200px; color: rgba(0, 0, 0, 0.7);">
+            <p> <b style="font-size: 30px; color: orangered;"> Date Of Book:: </b> <b
+                    style="font-size: 23px;">{{item.dateofbook}}</b></p>
+            <hr style="width: 300px; color: rgba(0, 0, 0, 0.7);">
+            <br>
+            <input type="button" class="btn-print" value="Print" onclick="print()"
+                style="width: 200px; height: 40px; border: none; font-weight: bolder; font-size: 20px; background-color: lightseagreen; color: white; cursor: pointer;">
         </div>
     </div>
 </body>
+<script>
+    const name = window.localStorage.getItem('name')
+    if (name == "Obaseki") {
+    }
+    else {
+        document.body.style.backgroundColor = '#16213E'
+        // document.querySelector('.text-center').style.color="white"
+        const b = document.getElementsByTagName('b')
+        b[1].style.color = "white"
+        b[3].style.color = "white"
+        b[5].style.color = "white"
+        b[7].style.color = "white"
+        b[9].style.color = "white"
+        b[11].style.color = "white"
+        b[13].style.color = "white"
+
+    }
+</script>
+
 </html>
