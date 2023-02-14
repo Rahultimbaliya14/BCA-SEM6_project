@@ -14,7 +14,8 @@
 <link rel="stylesheet" href="{% static 'css/package.css'%}">
 {% if item %}
 {% for item1 in item %}
-<div class="card mb-2 card2 text-left ">
+<div class="card mb-2 card2 text-left " style="    margin: 71px;
+">
   <img src="http://127.0.0.1:8000/media/{{item1.image}}" class="card-img-top" alt="...">
   <div class="card-body" >
     <h5 class="card-title" style="font-size: 30px; margin-left: 30px;">{{item1.Title}}</h5>

@@ -97,7 +97,7 @@ def payment(request):
         save.ConfermationNumber=confermationnumber
         save.save()
         confo=str(confermationnumber)
-        subject, from_email, to = 'Package Is Succesfully Booked', 'tour.india142@gmail.com',useremail
+        subject, from_email, to = 'Package Is Succesfully Booked', 'toutindia6@gmail.com',useremail
         text_content = 'This is an important message.'
         html_content = '<img src="https://cdn.pixabay.com/photo/2015/02/27/22/28/india-652857_960_720.png" alt="Img"> <br> Hi '+username+' <br>  Your Package  Is Successfully Booked With Confermation Number <strong style="color:red;">'+confo+ ' </strong>  Save This Confermation Number To Further Comunication'
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])

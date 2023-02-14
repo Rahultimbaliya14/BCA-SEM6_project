@@ -62,7 +62,7 @@ def signup(request):
                 if len(passw) >= 8:
                         if len(phone) == 10:
                             if verify:
-                                 subject, from_email, to = 'Create Account', 'tour.india142@gmail.com',mail
+                                 subject, from_email, to = 'Create Account', 'toutindia6@gmail.com',mail
                                  text_content = 'This is an important message.'
                                  html_content = '<img src="https://cdn.pixabay.com/photo/2015/02/27/22/28/india-652857_960_720.png" alt="img"> <br> Hi '+name+' <br> Is Your One Time Password(OTP)<strong style="color:red;">'+otp2+ '</strong><br>Use For Craete The Account India_Tour'
      
@@ -267,7 +267,7 @@ def forget(request):
                       otpr=random.randint(10000, 99999)
                       otpr2 = str(otpr)
                       print(rpwd,emailr,otpr2)
-                      subject, from_email, to = 'Forget Password', 'tour.india142@gmail.com',emailr
+                      subject, from_email, to = 'Forget Password', 'toutindia6@gmail.com',emailr
                       text_content = 'This is an important message.'
                       html_content = '<img src="https://cdn.pixabay.com/photo/2015/02/27/22/28/india-652857_960_720.png" alt="Img"> <br> Hi '+uemail[0].get('name')+' <br>   Is Your One Time Password(OTP) <strong style="color:red;">'+otpr2+ ' </strong>  Used To Reset The Password '
                       msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
@@ -295,7 +295,7 @@ def demail(request):
             otpd=random.randint(10000, 99999)
             otpd2 = str(otpd)
             print(rpwd,emailr,otpr2)
-            subject, from_email, to = 'Unregister Account', 'tour.india142@gmail.com',semail
+            subject, from_email, to = 'Unregister Account', 'toutindia6@gmail.com',semail
             text_content = 'This is an important message.'
             html_content = '<img src="https://cdn.pixabay.com/photo/2015/02/27/22/28/india-652857_960_720.png" alt="Img"> <br> Hi '+name+' <br>   Is Your One Time Password(OTP) <strong style="color:red;">'+otpd2+ ' </strong>  Used To Unregistered The The Account '
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])

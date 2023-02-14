@@ -165,7 +165,8 @@ MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 #Confugration For Send Mail
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT=587
-EMAIL_HOST_USER='tour.india142@gmail.com'
-EMAIL_HOST_PASSWORD='azjbrndlplloakqw'
+EMAIL_HOST_USER='toutindia6@gmail.com'
+EMAIL_HOST_PASSWORD='gorpyzyocxletdhp'
 EMAIL_USE_TLS=True
 # cujygscajxajblvs
+# gorpyzyocxletdhp
