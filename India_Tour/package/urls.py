@@ -9,5 +9,6 @@ urlpatterns = [
     path('/hfkdfhksdkfksdfkdsfkjdsjfhDFGKDFG',views.payment,name="pay"),
     path('/packageinfo',views.showpackage,name="packageinfo"),
     path('/package',views.package),
-    path('/admindel',views.deletep)
+    path('/admindel',views.deletep),
+    path('/handlerequest',views.handlerequest,name="handlerequest")
 ]

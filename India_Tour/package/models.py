@@ -13,6 +13,7 @@ class Package(models.Model):
         return self.Title
 
 class Book(models.Model):
+    PaymentId=models.CharField(max_length=225)
     Packageid=models.CharField(max_length=225)
     Packagename=models.CharField(max_length=225)
     Username=models.CharField(max_length=225)
@@ -24,3 +25,15 @@ class Book(models.Model):
 
     def __str__(self):
         return self.Packagename
+    
+class Payment(models.Model):
+    OrderId=models.CharField(max_length=225)
+    Code=models.CharField(max_length=225)
+    Bankname=models.CharField(max_length=225)
+    Paymentmode=models.CharField(max_length=225)
+    Amount=models.CharField(max_length=225)
+    Status=models.CharField(max_length=225)
+    Date=models.CharField(max_length=225)
+    
+    def __str__(self):
+        return self.OrderId

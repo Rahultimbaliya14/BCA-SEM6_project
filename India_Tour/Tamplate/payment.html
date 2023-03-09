@@ -13,30 +13,32 @@
                     <input class="form-control mb-3" type="text" placeholder="Name" value="{{request.session.uname}}" readonly>
                 </div>
             </div>
-            <div class="col-12">
+            <!-- <div class="col-12">
                 <div class="d-flex flex-column">
                     <p class="text mb-1">Card Number</p>
                     <input class="form-control mb-3" type="text" placeholder="1234 5678 435678" readonly>
                 </div>
-            </div>
-            <div class="col-6">
+            </div> -->
+            <!-- <div class="col-6">
                 <div class="d-flex flex-column">
                     <p class="text mb-1">Expiry</p>
                     <input class="form-control mb-3" type="text" placeholder="09/2028" readonly>
                 </div>
-            </div>
-            <div class="col-6">
+            </div> -->
+            <!-- <div class="col-6">
                 <div class="d-flex flex-column">
                     <p class="text mb-1">CVV/CVC</p>
                     <input class="form-control mb-3 pt-2 " type="password" placeholder="***" readonly>
                 </div>
-            </div>
+            </div> -->
             <div class="col-12">
                 <div class="mb-3">
                     <form action="" method="post">
                         {% csrf_token %}  
-                        <button class="btn btn-primary  save-btn">
+                        <button class="btn  save-btn" style="border: 1px solid  rgba(0, 0, 0, 0.5);">
                             Pay &#8377;{{request.session.amount}}
+                            <br>
+                            <img src="{% static 'image/paytm.png'%}" alt="" width="60px" height="20px">
                           </button>
                 </form>
                 </div>
